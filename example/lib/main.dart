@@ -134,7 +134,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
               Color bgColor = section%2==0? Colors.red:Colors.green;
               String title = _list[section]["group"];
+
+              double height = section%2==0?40:60;
+
               return Container(
+                height: height,
                 color: bgColor,
                 child: Padding(
                   padding:

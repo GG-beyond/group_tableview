@@ -114,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onRefresh: _onRefresh,
           onLoading: _onLoading,
           child: GroupListView(
+            style: ViewStyle.group,
             itemBuilder: _itemBuilder,
             numberOfSections: _list.length,
             numberOfRowsInSection: (int section) {

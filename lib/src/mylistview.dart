@@ -4,15 +4,9 @@ import 'package:flutter/material.dart';
 /// 类型 IndexPath
 ///
 class IndexPath {
-  final int _section;
-  final int _row;
-
-  //mark get  方法
-  int get section => _section;
-
-  int get row => _row;
-
-  IndexPath(this._section, this._row);
+  final int section;
+  final int row;
+  IndexPath(this.section, this.row);
 }
 
 ///
@@ -40,6 +34,8 @@ class GroupListView extends StatefulWidget {
   final IndexPathWidgetBuilder itemBuilder; //item builder方法
   final IndexedWidgetBuilder sectionHeaderBuilder; // section header builder 方法
   final IndexedWidgetBuilder sectionFooterBuilder; // section footer builder 方法
+  final ScrollController controller; // controller
+  final Color backgroundColor; // 背景颜色
 
   GroupListView(
       {this.itemBuilder,
@@ -47,8 +43,10 @@ class GroupListView extends StatefulWidget {
       this.numberOfSections = 1,
       this.numberOfRowsInSection,
       this.sectionHeaderBuilder,
-      this.sectionFooterBuilder})
-      : assert(itemBuilder != null);
+      this.sectionFooterBuilder,
+      this.controller,
+      this.backgroundColor})
+      : assert(itemBuilder != null,"itemBuilder 不能为null");
 
   @override
   _GroupListViewState createState() => _GroupListViewState();
@@ -72,80 +70,87 @@ class _GroupListViewState extends State<GroupListView> {
     super.initState();
     _initData();
 
-    controller = ScrollController();
-    controller.addListener(() {
+    if(controller == null){
+      controller = ScrollController();
+    }
+    if(widget.style == ViewStyle.group){
 
-      double offsetY = controller.offset;
+      controller.addListener(() {
 
-      if (offsetY <= 0.0) {
-        currentSectionModel = sectionList[0];
-        topOffsetY=-offsetY;
-        setState(() {
+        double offsetY = controller.offset;
 
-        });
-      } else {
-        int _currentIndex = -1;
-
-        for (int section = sectionList.length - 1; section >= 0; section--) {
-          GlobalKey globalKey = keyList[section];
-          if (globalKey.currentContext != null) {
-            RenderBox renderBox = globalKey.currentContext.findRenderObject();
-            double dy = renderBox.localToGlobal(Offset(0, position)).dy;
-
-            if (dy <= 0) {
-              //查找最后一个悬浮的
-              _currentIndex = section;
-              _size = renderBox.size;
-              break;
-            }
-          }
-        }
-
-        //加一层复用保护
-        if (_currentIndex < 0 && currentIndex >= 0) {
-          GlobalKey key = keyList[currentIndex];
-          if (key.currentContext == null) {
-            _currentIndex = currentIndex;
-          } else {
-            _currentIndex = currentIndex - 1;
-          }
-        }
-
-        double _offset = 0;
-
-        if (_currentIndex >= 0) {
-          if ((_currentIndex + 1) < sectionList.length) {
-            //当前悬浮的
-            GlobalKey nextGlobalKey = keyList[_currentIndex+1];
-
-            if (nextGlobalKey.currentContext!=null) {
-
-              RenderBox nextRenderBox =
-              nextGlobalKey.currentContext.findRenderObject();
-              double nextDy = nextRenderBox.localToGlobal(Offset(0, position)).dy;
-
-              //取出滚动方向对应的数据
-              double offsetAxis = nextDy;
-              double sizeAxis = _size.height;
-
-              //计算偏移位置
-              if (offsetAxis < sizeAxis) {
-                _offset = offsetAxis - sizeAxis;
-              }
-            }
-          }
-        }
-
-        if (_currentIndex != currentIndex || _offset != topOffsetY) {
-          currentIndex = _currentIndex;
-          currentSectionModel = sectionList[_currentIndex];
-          topOffsetY = _offset;
+        if (offsetY <= 0.0) {
+          currentSectionModel = sectionList[0];
+          topOffsetY=-offsetY;
           setState(() {
 
           });
+        } else {
+          int _currentIndex = -1;
+
+          for (int section = sectionList.length - 1; section >= 0; section--) {
+            GlobalKey globalKey = keyList[section];
+            if (globalKey.currentContext != null) {
+              RenderBox renderBox = globalKey.currentContext.findRenderObject();
+              double dy = renderBox.localToGlobal(Offset(0, position)).dy;
+
+              if (dy <= 0) {
+                //查找最后一个悬浮的
+                _currentIndex = section;
+                _size = renderBox.size;
+                sectionList[section].headerHeight = _size.height;
+                break;
+              }
+            }
+          }
+
+          //加一层复用保护
+          if (_currentIndex < 0 && currentIndex >= 0) {
+            GlobalKey key = keyList[currentIndex];
+            if (key.currentContext == null) {
+              _currentIndex = currentIndex;
+              _size = Size(_size.width, sectionList[currentIndex].headerHeight);
+            } else {
+              _currentIndex = currentIndex - 1;
+            }
+          }
+
+          double _offset = 0;
+
+          if (_currentIndex >= 0) {
+            if ((_currentIndex + 1) < sectionList.length) {
+              //当前悬浮的
+              GlobalKey nextGlobalKey = keyList[_currentIndex+1];
+
+              if (nextGlobalKey.currentContext!=null) {
+
+                RenderBox nextRenderBox =
+                nextGlobalKey.currentContext.findRenderObject();
+                double nextDy = nextRenderBox.localToGlobal(Offset(0, position)).dy;
+
+                //取出滚动方向对应的数据
+                double offsetAxis = nextDy;
+                double sizeAxis = _size.height;
+
+                //计算偏移位置
+                if (offsetAxis < sizeAxis) {
+                  _offset = offsetAxis - sizeAxis;
+                }
+              }
+            }
+          }
+
+          if (_currentIndex != currentIndex || _offset != topOffsetY) {
+            currentIndex = _currentIndex;
+            currentSectionModel = sectionList[_currentIndex];
+            topOffsetY = _offset;
+            setState(() {
+
+            });
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   ///根据DataSource 初始化数据
@@ -170,7 +175,7 @@ class _GroupListViewState extends State<GroupListView> {
       bool isHaveHeader = header != null ? true : false; //是否有header
       bool isHaveFooter = footer != null ? true : false; //是否有footer
 
-      SectionModel sectionModel = SectionModel(isHaveHeader, section, rowCount, isHaveFooter, header);
+      SectionModel sectionModel = SectionModel(section, rowCount,isHaveHeader,isHaveFooter, header);
       if(section == 0){
         currentSectionModel = sectionModel;
       }
@@ -190,10 +195,25 @@ class _GroupListViewState extends State<GroupListView> {
   Widget build(BuildContext context) {
 
     double top = topOffsetY??0;
+
+    if(widget.style == ViewStyle.plain){
+
+      return Container(
+        color: widget.backgroundColor??Colors.transparent,
+        child: ListView.builder(
+          controller: controller,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: _itemBuilder,
+          itemCount: _calculateItemCount(),
+        ),
+      );
+    }
+
     return Container(
       child: Stack(
         children: <Widget>[
           Container(
+            color: widget.backgroundColor??Colors.transparent,
             child: ListView.builder(
               controller: controller,
               physics: BouncingScrollPhysics(),
@@ -204,8 +224,8 @@ class _GroupListViewState extends State<GroupListView> {
           Positioned(
               left: 0,
               right: 0,
-              top: top,//currentSectionModel.header??
-              child: currentSectionModel.header??Container(height: 40,color: Colors.purple,)),
+              top: top,
+              child: currentSectionModel.header??Container()),
         ],
       ),
     );
@@ -277,14 +297,16 @@ class _GroupListViewState extends State<GroupListView> {
 ///  ============================ model类 ===============================================
 ///
 class SectionModel {
-  final bool isHaveHeader; //是否有header
   final Widget header; //是否有header
   final int section; //当前section
   final int rowCount; //记录当前section下有多少个row
+  final bool isHaveHeader; //是否有header
   final bool isHaveFooter; //是否有footer
 
-  SectionModel(this.isHaveHeader, this.section, this.rowCount,
+  SectionModel( this.section, this.rowCount,this.isHaveHeader,
       this.isHaveFooter, this.header);
+
+  double headerHeight;
 }
 
 ///
@@ -307,6 +329,6 @@ class SectionFooterModel {
 ///记录 row 的model类，
 ///
 class RowModel {
-  final IndexPath indexPath; //row 所在的section和下标
+  final IndexPath indexPath; //indexPath 的section和row
   RowModel(this.indexPath);
 }

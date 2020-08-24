@@ -147,10 +147,13 @@ class _GroupTableViewState extends State<GroupTableView> {
           }
 
           if (_currentIndex != currentIndex || _offset != topOffsetY) {
-            currentIndex = _currentIndex;
-            currentSectionModel = sectionList[_currentIndex];
-            topOffsetY = _offset;
-            setState(() {});
+
+            if(_currentIndex>-1){
+              currentIndex = _currentIndex;
+              currentSectionModel = sectionList[_currentIndex];
+              topOffsetY = _offset;
+              setState(() {});
+            }
           }
         }
       });

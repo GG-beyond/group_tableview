@@ -27,9 +27,9 @@ typedef SectionBuilder = int Function(int section);
 typedef Widget ListViewSuperWidgetBuilder(
     BuildContext context, Widget scrollWidget);
 ///
-/// GroupListView 实现
+/// GroupTableView 实现
 ///
-class GroupListView extends StatefulWidget {
+class GroupTableView extends StatefulWidget {
   final ViewStyle style; //listview样式,默认是plain样式
   final int numberOfSections; //section个数 默认1
   final SectionBuilder numberOfRowsInSection; //每个section内有多少个row
@@ -40,7 +40,7 @@ class GroupListView extends StatefulWidget {
   final ScrollController controller; // controller
   final Color backgroundColor; // 背景颜色
 
-  GroupListView(
+  GroupTableView(
       {this.itemBuilder,
       this.style = ViewStyle.plain,
       this.numberOfSections = 1,
@@ -53,10 +53,10 @@ class GroupListView extends StatefulWidget {
       : assert(itemBuilder != null, "itemBuilder 不能为null");
 
   @override
-  _GroupListViewState createState() => _GroupListViewState();
+  _GroupTableViewState createState() => _GroupTableViewState();
 }
 
-class _GroupListViewState extends State<GroupListView> {
+class _GroupTableViewState extends State<GroupTableView> {
   ScrollController _controller;
   ListView listView;
   List<SectionModel> sectionList = [];

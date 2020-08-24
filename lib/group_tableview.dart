@@ -1,4 +1,4 @@
-library group_listview;
+library group_tableview;
 
 export 'src/mylistview.dart';
 /// A Calculator.

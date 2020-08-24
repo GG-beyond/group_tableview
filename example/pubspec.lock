@@ -74,7 +74,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  group_listview:
+  group_tableview:
     dependency: "direct main"
     description:
       path: ".."

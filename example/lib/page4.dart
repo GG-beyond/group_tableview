@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:group_listview/group_listview.dart';
+import 'package:group_tableview/group_tableview.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -98,7 +98,7 @@ class _Page4State extends State<Page4> {
         title: Text("TableView Group"),
       ),
       body: Container(
-        child: GroupListView(
+        child: GroupTableView(
           controller: _controller,
           style: ViewStyle.group,
           itemBuilder: _itemBuilder,

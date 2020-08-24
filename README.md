@@ -1,4 +1,4 @@
 # group_tableview
 
 
-flutter 仿iOS TableView 实现分组功能，支持plain和group样式，支持下拉刷新组件
+The flutter implemented grouping function in the image of iOS TableView, supported plain and Group styles, and supported drop-down refresh components

@@ -9,7 +9,6 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  RefreshController _refreshController;
   ScrollController _controller = ScrollController();
 
   List<Map> _list = [
@@ -31,33 +30,8 @@ class _Page2State extends State<Page2> {
     },
   ];
 
-  void _onRefresh() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _refreshController.loadComplete();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _refreshController = RefreshController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _refreshController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("TableView Group"),
@@ -91,7 +65,7 @@ class _Page2State extends State<Page2> {
               color: bgColor,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Text(
                   "$title             这是一个header -> section = ${section.toString()}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

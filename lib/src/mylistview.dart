@@ -26,6 +26,7 @@ typedef IndexPathWidgetBuilder = Widget Function(
 typedef SectionBuilder = int Function(int section);
 typedef Widget ListViewSuperWidgetBuilder(
     BuildContext context, Widget scrollWidget);
+
 ///
 /// GroupTableView 实现
 ///
@@ -86,13 +87,9 @@ class _GroupTableViewState extends State<GroupTableView> {
         int _currentIndex = -1;
 
         if (offsetY < 0.0) {
-
           floating = false;
-          setState(() {
-
-          });
+          setState(() {});
         } else {
-
           floating = true;
           for (int section = sectionList.length - 1; section >= 0; section--) {
             GlobalKey globalKey = keyList[section];
@@ -147,8 +144,7 @@ class _GroupTableViewState extends State<GroupTableView> {
           }
 
           if (_currentIndex != currentIndex || _offset != topOffsetY) {
-
-            if(_currentIndex>-1){
+            if (_currentIndex > -1) {
               currentIndex = _currentIndex;
               currentSectionModel = sectionList[_currentIndex];
               topOffsetY = _offset;
@@ -160,7 +156,6 @@ class _GroupTableViewState extends State<GroupTableView> {
     }
 
     _initData();
-
   }
 
   ///根据DataSource 初始化数据
@@ -210,13 +205,11 @@ class _GroupTableViewState extends State<GroupTableView> {
 
   @override
   Widget build(BuildContext context) {
-
-
     Widget child;
-    if(widget.refreshWidget!=null&&widget.refreshWidget(context,listView)!=null){
-
-      child = widget.refreshWidget(context,listView);
-    }else{
+    if (widget.refreshWidget != null &&
+        widget.refreshWidget(context, listView) != null) {
+      child = widget.refreshWidget(context, listView);
+    } else {
       child = listView;
     }
 

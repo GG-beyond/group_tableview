@@ -120,7 +120,7 @@ class _Page3State extends State<Page3> {
               color: bgColor,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Text(
                   "$title             这是一个header -> section = ${section.toString()}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -141,7 +141,7 @@ class _Page3State extends State<Page3> {
         elevation: 8,
         child: ListTile(
           contentPadding:
-          const EdgeInsets.symmetric(horizontal: 18, vertical: 10.0),
+              const EdgeInsets.symmetric(horizontal: 18, vertical: 10.0),
           title: Text(
             _list[indexPath.section]["list"][indexPath.row],
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),

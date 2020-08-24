@@ -9,7 +9,7 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
-  RefreshController _refreshController;
+
   List<Map> _list = [
     {
       "group": "A",
@@ -29,33 +29,8 @@ class _Page1State extends State<Page1> {
     },
   ];
 
-  void _onRefresh() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    _refreshController.loadComplete();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _refreshController = RefreshController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _refreshController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("TableView Plain"),

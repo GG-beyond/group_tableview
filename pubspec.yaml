@@ -1,6 +1,6 @@
 name: group_tableview
-description: A new Flutter package.
-version: 0.0.2
+description: flutter 仿iOS TableView 实现分组功能，支持plain和group样式，支持下拉刷新组件
+version: 0.0.3
 homepage: https://github.com/GG-beyond/group_tableview
 
 environment:

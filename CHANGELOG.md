@@ -1,3 +1,6 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] -  2020-08-24
 
-* TODO: Describe initial release.
+* 实现 ListView分组悬浮，支持刷新组件
+
+## [0.0.2] -  2020-08-24
+* 修改分组悬浮bug

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:group_listview/group_listview.dart';
+import 'package:group_tableview/group_tableview.dart';
 
 void main() {
   test('adds one to input values', () {

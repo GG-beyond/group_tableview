@@ -1,6 +1,6 @@
 name: group_tableview
 description: The flutter implemented grouping function in the image of iOS TableView, supported plain and Group styles, and supported drop-down refresh components
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/GG-beyond/group_tableview
 
 environment:

@@ -86,7 +86,8 @@ class _GroupTableViewState extends State<GroupTableView> {
         double offsetY = _controller.offset;
         int _currentIndex = -1;
 
-        if (offsetY < 0.0) {
+        if (offsetY <= 0.0) {
+          currentIndex = -1; //当前是第几个分区悬浮
           floating = false;
           setState(() {});
         } else {
@@ -148,8 +149,9 @@ class _GroupTableViewState extends State<GroupTableView> {
               currentIndex = _currentIndex;
               currentSectionModel = sectionList[_currentIndex];
               topOffsetY = _offset;
-              setState(() {});
             }
+            setState(() {});
+
           }
         }
       });

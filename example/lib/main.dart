@@ -35,12 +35,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> _list = [
-    "tableview plain样式",
-    "tableview plain样式 带刷新",
-    "tableview group悬停样式",
-    "tableview group悬停样式 带刷新"
+    "table_view plain样式",
+    "table_view plain样式 带刷新",
+    "table_view group悬停样式",
+    "table_view group悬停样式 带刷新"
   ];
   List<Widget> _widgetArr = [Page1(), Page3(), Page2(), Page4()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

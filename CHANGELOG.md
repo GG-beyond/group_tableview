@@ -1,18 +1,29 @@
-## [0.0.1] -  2020-08-24
-* 实现 ListView分组悬浮，支持刷新组件
-
-## [0.0.2] -  2020-08-24
-* 修改分组悬浮bug
-
-## [0.0.3] -  2020-08-24
-* 修改分组悬浮bug
-
-
-## [0.0.4] -  2020-08-24
-* dart开发规范 修改语法、命名
-
-## [0.0.5] -  2020-08-24
-* 修改分组悬浮bug
+## [0.0.7] -  2020-08-26
+* Dart code formatting
 
 ## [0.0.6] -  2020-08-24
-* 修改示例图
+* Modify the renderings
+
+## [0.0.5] -  2020-08-24
+* Fixed group hover bug
+
+## [0.0.4] -  2020-08-24
+* Dart development specification
+
+## [0.0.3] -  2020-08-24
+* Fixed group hover bug
+
+## [0.0.2] -  2020-08-24
+* Fixed group hover bug
+
+## [0.0.1] -  2020-08-24
+* Implement ListView group suspension, support refresh component
+
+
+
+
+
+
+
+
+

@@ -53,6 +53,7 @@ class _Page4State extends State<Page4> {
     // TODO: implement dispose
     super.dispose();
     _refreshController.dispose();
+    _controller.dispose();
   }
 
   @override

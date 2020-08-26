@@ -9,7 +9,6 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
-
   List<Map> _list = [
     {
       "group": "A",

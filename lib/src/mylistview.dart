@@ -28,7 +28,7 @@ typedef Widget ListViewSuperWidgetBuilder(
     BuildContext context, Widget scrollWidget);
 
 ///
-/// GroupTableView 实现
+/// GroupTableView 实现clean
 ///
 class GroupTableView extends StatefulWidget {
   final ViewStyle style; //listview样式,默认是plain样式
@@ -151,7 +151,6 @@ class _GroupTableViewState extends State<GroupTableView> {
               topOffsetY = _offset;
             }
             setState(() {});
-
           }
         }
       });
